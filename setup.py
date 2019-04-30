@@ -1,30 +1,71 @@
-"""
-Package installation via setup()
-"""
-import codecs
-import os
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import print_function
+
+import io
 import re
+from glob import glob
+from os.path import basename
+from os.path import dirname
+from os.path import join
+from os.path import splitext
+
+from setuptools import find_packages
 from setuptools import setup
 
-#Allow single version in source file to be used here
-#From https://packaging.python.org/guides/single-sourcing-package-version/
-def read(*parts):
-    # intentionally *not* adding an encoding option to open
-    # see here: https://github.com/pypa/virtualenv/issues/201#issuecomment-3145690
-    here = os.path.abspath(os.path.dirname(__file__))
-    return codecs.open(os.path.join(here, *parts), 'r').read()
-def find_version(*file_paths):
-    version_file = read(*file_paths)
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError("Unable to find version string.")
 
-setup(name="simplify-docx",
-        version=find_version('simplify_docx', '__init__.py'),
-        description="A utility for simplifying python-docx document objects",
-        author="Microsoft Research",
-        packages=['simplify_docx'],
-        license='UNLICENSED',
-        install_requires=["python-docx"])
+def read(*names, **kwargs):
+    return io.open(
+        join(dirname(__file__), *names), encoding=kwargs.get("encoding", "utf8")
+    ).read()
+
+
+setup(
+    name="simplify-docx",
+    version="0.1.0",
+    description="A utility for simplifying python-docx document objects",
+    long_description="%s\n%s"
+    % (
+        re.compile("^.. start-badges.*^.. end-badges", re.M | re.S).sub(
+            "", read("README.md")
+        ),
+        re.sub(":[a-z]+:`~?(.*?)`", r"``\1``", read("CHANGELOG.md")),
+    ),
+    author="Microsoft Research",
+    author_email="jathorpe@microsoft.com",
+    url="https://microsofteconomics.visualstudio.com/EconTools/_git/loadify?_a=history",
+    packages=find_packages("src"),
+    package_dir={"": "src"},
+    py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
+    include_package_data=True,
+    zip_safe=False,
+    classifiers=[
+        # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: Unix",
+        "Operating System :: POSIX",
+        "Operating System :: Microsoft :: Windows",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: Implementation :: CPython",
+        "Programming Language :: Python :: Implementation :: PyPy",
+        "Topic :: Utilities",
+    ],
+    keywords=["sql", "csv"],
+    install_requires=[
+            "lxml==4.3.3",
+            "more-itertools==7.0.0",
+            "python-docx==0.8.10",
+            "six==1.12.0",
+            "wincertstore==0.2",
+        ],
+    extras_require={':python_version=="2.6"': ["argparse"]},
+    entry_points={"console_scripts": ["loadify = loadify:loadify"]},
+)
