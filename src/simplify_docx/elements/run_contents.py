@@ -75,23 +75,23 @@ class text(el):
             )
             _value = _value.replace(u"\u201c", '"').replace(u"\u201d", '"')
 
-        if options.get("dumb-hyphens", True):
+        if options.get("dumb-spaces", True):
             _value = (
-                _value.replace(u"\u2000", "-")
-                .replace(u"\u2001", "-")
-                .replace(u"\u2002", "-")
-                .replace(u"\u2003", "-")
-                .replace(u"\u2004", "-")
-                .replace(u"\u2005", "-")
-                .replace(u"\u2006", "-")
-                .replace(u"\u2007", "-")
-                .replace(u"\u2008", "-")
-                .replace(u"\u2009", "-")
-                .replace(u"\u200A", "-")
-                .replace(u"\u201B", "-")
+                _value.replace(u"\u2000", " ")
+                .replace(u"\u2001", " ")
+                .replace(u"\u2002", " ")
+                .replace(u"\u2003", " ")
+                .replace(u"\u2004", " ")
+                .replace(u"\u2005", " ")
+                .replace(u"\u2006", " ")
+                .replace(u"\u2007", " ")
+                .replace(u"\u2008", " ")
+                .replace(u"\u2009", " ")
+                .replace(u"\u200A", " ")
+                .replace(u"\u201B", " ")
             )
 
-        if options.get("dumb-spaces", True):
+        if options.get("dumb-hyphens", True):
             _value = (
                 _value.replace(u"\u2010", "-")
                 .replace(u"\u2011", "-")
