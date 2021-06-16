@@ -6,7 +6,7 @@ def get_pStyle(p, doc):
     """
     Get the referenced style element for a paragraph with a p.pPr.pStyle
     """
-    if p.pPr is not None and \
+    if getattr(p, "pPr", None) is not None and \
             p.pPr.pStyle is not None:
         return doc.styles.element.find("w:style[@w:styleId='%s']" % p.pPr.pStyle.val,
                 doc.styles.element.nsmap)
@@ -17,7 +17,7 @@ def get_num_style(p, doc):
     """
     The the paragraph's Numbering style
     """
-    if p.pPr is not None \
+    if getattr(p, "pPr", None) is not None \
             and p.pPr.numPr is not None\
             and p.pPr.numPr.numId is not None:
         # the numbering style doc
@@ -47,7 +47,7 @@ def get_paragraph_ind(p, doc):
     * Direct Formatting
     """
 
-    if p.pPr is not None and\
+    if getattr(p, "pPr", None) is not None and\
             p.pPr.ind is not None:
         return p.pPr.ind
 
