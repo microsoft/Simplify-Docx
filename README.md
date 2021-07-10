@@ -2,9 +2,9 @@
 
 DOCX files are complex, and their complexity makes scraping documents
 for their content difficult. The aim of this package is to simplify
-`.docx` files to just the components which carry meaning thereby easing the
-process of document identification and scraping by converting a `.docx`
-file into a predictable an *human readable* JSON file.
+`.docx` files to just the components which carry meaning, thereby easing the
+process of pattern matching and data extraction by converting a `.docx`
+file into a predictable and *human readable* JSON file.
 
 Simplifying a complex document down to it's *meaningful* parts of course
 requires taking a position on what does and does-not convey meaning in a
@@ -43,8 +43,12 @@ etc.), you'll need to clone [this fork](https://github.com/jdthorpe/python-docx)
 
 ### General
 
-* **"friendly-names"**: (*Default = `True`*): Use user-friendly type names
+* **"friendly-name"**: (*Default = `True`*): Use user-friendly type names
 	such as "table-cell", over standard element names like "CT_Tc"
+
+* **"merge-consecutive-text"**: (*Default = `True`*): Sentences and even single
+	words can be represented by multiple text elements. If `True`,
+	concatenate consecutive text elements into a single text element.
 
 ### Ignoring Invisible things
 
@@ -147,9 +151,6 @@ often used to divide sections of a document into logical components.
 
 ### Special content
 
-* **"merge-consecutive-text"**: (*Default = `True`*): Sentences and even single
-	words can be represented by multiple text elements. If `True`,
-	concatenate consecutive text elements into a single text element.
 * **"flatten-hyperlink"**: (*Default = `True`*): Flatten hyperlinks, including
 	their contents in the flow of normal text.
 * **"flatten-smartTag"**: (*Default = `True`*): Flatten smartTag elements, 
