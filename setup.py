@@ -40,6 +40,7 @@ setup(
     py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
     include_package_data=True,
     zip_safe=False,
+    long_description_content_type='text/markdown',
     classifiers=[
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
         "Development Status :: 5 - Production/Stable",
@@ -60,10 +61,10 @@ setup(
     ],
     keywords=["sql", "csv"],
     install_requires=[
-            "lxml==4.3.3",
+            "lxml>=4.3.3,<5",
             "more-itertools==7.0.0",
             "python-docx==0.8.10",
-            "six==1.12.0",
+            "six>=1.12.0<2",
             "wincertstore==0.2",
         ],
     extras_require={':python_version=="2.6"': ["argparse"]},
