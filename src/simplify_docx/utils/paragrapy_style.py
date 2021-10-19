@@ -53,6 +53,7 @@ def get_paragraph_ind(p, doc):
 
     num_style = get_num_style(p, doc)
     if num_style is not None and \
+            getattr(num_style, "pPr", None) is not None and \
             num_style.pPr is not None and \
             num_style.pPr.ind is not None:
         return num_style.pPr.ind
