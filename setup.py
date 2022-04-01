@@ -63,7 +63,7 @@ setup(
     install_requires=[
         "lxml>=4.3.3,<5",
         "more-itertools==7.0.0",
-        "python-docx==0.8.10",
+        "python-docx>=0.8.10",
         "six>=1.12.0<2",
         "wincertstore==0.2",
     ],
