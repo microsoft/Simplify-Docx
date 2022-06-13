@@ -70,7 +70,9 @@ class table(container):
 
         _desc = self.fragment.tblPr.find(qn("w:tblDescription"))
         if _desc is not None:
-            if (not _desc.val) and options.get("ignore-empty-table-description", True):
+            if (not getattr(_desc, "val", None)) and options.get(
+                "ignore-empty-table-description", True
+            ):
                 pass
             else:
                 out["tblDescription"] = _desc.val
