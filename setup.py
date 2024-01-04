@@ -64,7 +64,7 @@ setup(
         "lxml>=4.3.3,<5",
         "more-itertools==7.0.0",
         "python-docx>=0.8.10",
-        "six>=1.12.0<2",
+        "six>=1.12.0,<2",
         "wincertstore==0.2",
     ],
     extras_require={':python_version=="2.6"': ["argparse"]},
